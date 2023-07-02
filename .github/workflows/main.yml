@@ -16,8 +16,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run commit script
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
            git config --global user.name ${GITHUB_ACTOR}
            git config --global user.email ${{ secrets.USER_EMAIL }}
+           git remote set-url origin https://$ACCESS_TOKEN:x-oauth-basic@github.com/AbhinawRatan/my_fairy_tknishh.git
            git commit --allow-empty -m "Plant grass: `date +'%Y-%m-%d %H:%M:%S'`" 
            git push origin master
